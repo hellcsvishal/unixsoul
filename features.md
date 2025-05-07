@@ -8,3 +8,5 @@
 - Allows users to keep their setup minimal (with flexibility for different user needs)
 - Targets a wide range of users: developers, artists, gamers, streamers, retro fans, anime fans, and everyday Linux users
 - Only supports one kind of editor—and it must use Vim motions
+- unix will provide a bunch of small programs essential for working of the env setup.
+- there might be a chance that user wants to configure using those essential tools so we are putting it in .local for easier execution from anywhere in the /home/user
