@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+copy(){
+    # copy file after checking whether we want to override the file or dir
+    if [[ -z $is_dir ]]; then
+        read -p "Directory already exists! Do you want to override [y/N]" action
+        if [[ $action == "y" || $action == "Y" ]]; then
+            rm -r $HOME/.config/$1
+            cp -r $PWD/$1 $HOME/.config/$1
+        fi
+
+    elif [[ -z $is_file ]]; then
+        read -p "File already exists! Do you want to override [y/N]" action
+        if [[ $action == "y" || $action == "Y" ]]; then
+            rm -r $HOME/.config/$1
+            cp $PWD/$1 $HOME/.config/$1
+        fi
+    fi
+}
+
+help(){
+    #TODO: Write full command for this tool also don't forget to source this 
+    # folder so that you can use it without using unixsoul directly
+    echo hello
+}
+
+
+# HERE THE LIST OF COMMANDS WILL BE EXECTUED
+
+if [[ -z $1 ]]; then
+    echo "Enter a directory or file"
+    exit 0
+fi
+
+grep=()
+
+while [[ $# -gt 0 ]]; do
+    grep+=($1)
+    shift
+done
+
+for s in ${grep[@]}; do
+    echo $s
+done
+
+is_dir=""
+is_file=""
+
+# Checks if $1 (which will be changed to $grep or $s) is a file or directory
+# i.e the passed argument is a file or directory
+if [[ -d $PWD/$1 ]]; then
+    is_dir="1"
+elif [[ -f $PWD/$1 ]]; then
+    is_file="1"
+fi
