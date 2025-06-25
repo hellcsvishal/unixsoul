@@ -1,15 +1,10 @@
-# Unix Soul
+# UnixSoul
 
-Unix Soul is a go to configuration tool that touches the soul of every unix (GNU/linux) user.
+*Warning: Under development*
 
-I will try to bring all the inspirations form r/unix... you know what I am talking about
+UnixSoul is a desktop environment
 
-> Can't wait tilll first release
+> If you are looking to contirbute you can look for the features that we want in
+> features.md
 
-## HOW It should work
-
-```bash
-unixsoul --cfg_dir=[path/to/config/dir]
-unixsoul update 
-```
-> updates all the tools that are used in ricing may be we will use a unix_packages.json to keep record of all the packages that have been installed
+## Installation
