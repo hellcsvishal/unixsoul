@@ -2,18 +2,12 @@
 
 Package manager for unix soul
 
-## FEATURES
-- if a package is installed then don't install it
-- needs git to clone the configuration of package
-- if a user doesn't want to clone full repository as it might be too large (all just download of the repo)
-- makes heavy use of git
-- load previous versions
-- update a package
-- allow user to choose the dir to save all repos of package
-- mostly work like lazy.nvim
-- If something needs build dependencies then they can create a configuration file just like requirements.txt
-- Manage profiles from different directories
-- keep track of installed plugins
-- can install configurations && tools for which configuration is available
+This package manager is used to manage dependencies and pull plugins from github repositories
 
-> only installs the configurations that are specific to the unix soul
+> Updating the features due to changes in the design strucutre of unixsoul
+
+## FEATURES
+
+- Pull plugins from repositories
+- Manage dependencies (install, remove, update, clear, build_from_source)
+- Manage extra service pull
