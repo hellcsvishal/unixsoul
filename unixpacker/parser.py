@@ -8,21 +8,21 @@ class Command:
     
     def parse_line(self,line):
         tokens=line.strip().split()
-        if not toknns:
+        if not tokens:
             return None
         
         command= tokens[0]
         packages = []
         flags = []
 
-        for tokens in tokens[1:]:
+        for token in tokens[1:]:
             if tokens.startswith('-'):
                 flags.append(tokens)
             else:
                 packages.append(tokens)
 
         return Command(command, packages, flags)
-    def psre_file(self,file_path):
+    def parse_file(self,file_path):
         commands = []
         with open(file_path, 'r') as file:
             for line in file:
@@ -30,3 +30,20 @@ class Command:
                 if command:
                     commands.append(command)
         return commands    
+
+    def dic(self, text):
+        dictionary = {}
+        key=None
+        buffer=[]
+        for line in text.spilitlines():
+            if line.startswith('#'):
+                key=line.replace('#', '').strip()
+                buffer=[]
+            elif line.startwith("#END"):
+                dictionary[key] = "\n".join(buffer)
+                key = None
+
+            elif key is not None:
+                buffer.append(line.strip())
+
+        return dictionary                    
