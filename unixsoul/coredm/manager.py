@@ -1,0 +1,156 @@
+import os
+import sys
+import subprocess
+from typing import List
+
+class BaseManager:
+    pass
+
+class HyprlandManager(BaseManager):
+    def __init__(self):
+        self.CONTROLLER = "hyprctl"
+
+    def invokecmd(self, command):
+        # NOTE: why use this much functions when we can just invoke directly?
+        # its cause we need to invoke other services
+        # also there are high chances that the functions will change in order
+        # to create a universal manager
+        CMDTYPES = {
+            "activewindow": self._activewindow,
+            "activeworkspace":self._activeworkspace,
+            "animations":self._animations,
+            "binds":self._binds,
+            "clients":self._clients,
+            "configerrors":self._configerrors,
+            "cursorpos":self._cursorpos,
+            "decorations":self._decorations,
+            "devices":self._devices,
+            "dismissnotify":self._dismissnotify,
+            "dispatch":self._dispatch,
+            "getoption":self._getoption,
+            "globalshortcuts":self._globalshortcuts,
+            "hyprpaper":self._hyprpaper,
+            "hyprsunset":self._hyprsunset,
+            "instances":self._instances,
+            "keyword":self._keyword,
+            "kill":self._kill,
+            "layers":self._layers,
+            "layouts":self._layouts,
+            "monitors":self._monitors,
+            "notify":self._notify,
+            "output":self._output,
+            "plugin":self._plugin,
+            "reload":self._reload,
+            "rollinglog":self._rollinglog,
+            "setcursor":self._setcursor,
+            "seterror":self._seterror,
+            "setprop":self._setprop,
+            "splash":self._splash,
+            "switchxkblayout":self._switchxkblayout,
+            "systeminfo":self._systeminfo,
+            "version":self._version,
+            "workspacerules":self._workspacerules,
+            "workspaces":self._workspaces,
+        }
+
+        cmdtype = command[0]
+        CMDTYPES[command[0]](command[1:])
+
+    def _activewindow(self, *args):
+        pass
+
+    def _activeworkspace(self, *args):
+        pass
+
+    def _animations(self, *args):
+        pass
+
+    def _binds(self, *args):
+        pass
+
+    def _clients(self, *args):
+        pass
+
+    def _configerrors(self, *args):
+        pass
+
+    def _cursorpos(self, *args):
+        pass
+
+    def _decorations(self, *args):
+        pass
+
+    def _devices(self, *args):
+        pass
+
+    def _dismissnotify(self, *args):
+        pass
+
+    def _dispatch(self, *args):
+        pass
+
+    def _getoption(self, *args):
+        pass
+
+    def _globalshortcuts(self, *args):
+        pass
+
+    def _hyprpaper(self, *args):
+        pass
+
+    def _hyprsunset(self, *args):
+        pass
+
+    def _instances(self, *args):
+        pass
+
+    def _keyword(self, *args):
+        pass
+
+    def _kill(self, *args):
+        pass
+
+    def _layers(self, *args):
+        pass
+
+    def _layouts(self, *args):
+        pass
+
+    def _monitors(self, *args):
+        pass
+
+    def _notify(self, *args):
+        pass
+
+    def _output(self, *args):
+        pass
+
+    def _plugin(self, *args):
+        pass
+
+    def _reload(self, *args):
+        pass
+
+    def _rollinglog(self, *args):
+        pass
+
+    def _setcursor(self, *args):
+        pass
+
+    def _seterror(self, *args):
+        pass
+
+    def _setprop(self, *args):
+        pass
+
+    def _splash(self, *args):
+        pass
+
+    def _switchxkblayout(self, *args):
+        pass
+
+    def _workspacerules(self, *args):
+        pass
+
+    def _workspaces(self, *args):
+        pass
