@@ -16,8 +16,8 @@ class Command:
         flags = []
 
         for token in tokens[1:]:
-            if tokens.startswith('-'):
-                flags.append(tokens)
+            if token.startswith('-'):
+                flags.append(token)
             else:
                 packages.append(tokens)
 
@@ -32,18 +32,22 @@ class Command:
         return commands    
 
     def dic(self, text):
-        dictionary = {}
-        key=None
-        buffer=[]
-        for line in text.spilitlines():
-            if line.startswith('#'):
-                key=line.replace('#', '').strip()
-                buffer=[]
-            elif line.startwith("#END"):
+    dictionary = {}
+    key = None
+    buffer = []
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("# [") and stripped.endswith("]"):
+            if key is not None:
                 dictionary[key] = "\n".join(buffer)
-                key = None
+            key = stripped[3:-1].strip()  
+            buffer = []
+        elif key is not None and stripped and not stripped.startswith("#"):
+            buffer.append(stripped)
 
-            elif key is not None:
-                buffer.append(line.strip())
+    if key is not None:
+        dictionary[key] = "\n".join(buffer)
 
-        return dictionary                    
+    return dictionary
+     

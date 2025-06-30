@@ -1,0 +1,14 @@
+# [ install essentials ]
+apt install vim git curl -y
+
+# [ install dev tools ]
+pacman -S gcc make cmake --noconfirm
+
+# [ update system ]
+apt update && apt upgrade -y
+
+# [ remove unwanted packages ]
+sudo apt remove nano gedit -y
+
+# [ install Python packages ]
+pip install numpy pandas scikit-learn --upgrade
