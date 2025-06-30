@@ -3,15 +3,16 @@ class Command:
         self.command = command
         self.packages = packages
         self.flags = flags
+
     def __repr__(self):
         return f"Command(command={self.command}, packages={self.packages}, flags={self.flags})"
-    
-    def parse_line(self,line):
-        tokens=line.strip().split()
+
+    def parse_line(self, line):
+        tokens = line.strip().split()
         if not tokens:
             return None
-        
-        command= tokens[0]
+
+        command = tokens[0]
         packages = []
         flags = []
 
@@ -19,35 +20,67 @@ class Command:
             if token.startswith('-'):
                 flags.append(token)
             else:
-                packages.append(tokens)
+                packages.append(token)
 
         return Command(command, packages, flags)
-    def parse_file(self,file_path):
+
+    def parse_file(self, file_path):
         commands = []
         with open(file_path, 'r') as file:
             for line in file:
                 command = self.parse_line(line)
                 if command:
                     commands.append(command)
-        return commands    
+        return commands
 
     def dic(self, text):
-    dictionary = {}
-    key = None
-    buffer = []
+        dictionary = {}
+        key = None
+        buffer = []
 
-    for line in text.splitlines():
-        stripped = line.strip()
-        if stripped.startswith("# [") and stripped.endswith("]"):
-            if key is not None:
-                dictionary[key] = "\n".join(buffer)
-            key = stripped[3:-1].strip()  
-            buffer = []
-        elif key is not None and stripped and not stripped.startswith("#"):
-            buffer.append(stripped)
+        for line in text.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("# [") and stripped.endswith("]"):
+                if key is not None:
+                    dictionary[key] = "\n".join(buffer)
+                key = stripped[3:-1].strip()
+                buffer = []
+            elif key is not None and stripped and not stripped.startswith("#"):
+                buffer.append(stripped)
 
-    if key is not None:
-        dictionary[key] = "\n".join(buffer)
+        if key is not None:
+            dictionary[key] = "\n".join(buffer)
 
-    return dictionary
-     
+        return dictionary
+
+    def dic_commands(self, text):
+        section_dict = self.dic(text)  
+        parsed = {}
+
+        for section, block in section_dict.items():
+            lines = block.splitlines()
+            commands = []
+            for line in lines:
+                cmd = self.parse_line(line)
+                if cmd:
+                    commands.append(cmd)
+            parsed[section] = commands
+
+        return parsed
+
+        
+
+    
+
+file_path = r"C:\Users\visha\unixsoul\unixpacker\test_config.txt"
+
+with open(file_path, 'r') as f:
+    text = f.read()
+
+cmd_parser = Command("", [], [])
+result = cmd_parser.dic_commands(text)
+
+for section, cmds in result.items():
+    print(f"\n[{section}]")
+    for c in cmds:
+        print(c)
