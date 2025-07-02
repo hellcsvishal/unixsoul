@@ -1,4 +1,4 @@
-class Command:
+class Parser:
     def __init__(self, command, packages, flags):
         self.command = command
         self.packages = packages
