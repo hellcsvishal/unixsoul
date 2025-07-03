@@ -1,4 +1,4 @@
-class Command:
+class Parser:
     def __init__(self, command, packages, flags):
         self.command = command
         self.packages = packages
@@ -72,15 +72,3 @@ class Command:
 
     
 
-file_path = r"C:\Users\visha\unixsoul\unixpacker\test_config.txt"
-
-with open(file_path, 'r') as f:
-    text = f.read()
-
-cmd_parser = Command("", [], [])
-result = cmd_parser.dic_commands(text)
-
-for section, cmds in result.items():
-    print(f"\n[{section}]")
-    for c in cmds:
-        print(c)
